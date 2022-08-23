@@ -1,6 +1,4 @@
-void main() {
-  cascadeOperator();
-}
+void main() {}
 
 /* el standard el 3alamy en esm el class yeb2a awl 7arf feh capital */
 class Mobile {
