@@ -1,5 +1,5 @@
 void main() {
-  statics();
+  cascadeOperator();
 }
 
 /* el standard el 3alamy en esm el class yeb2a awl 7arf feh capital */
