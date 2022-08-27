@@ -1,46 +1,52 @@
 import 'package:flutter/material.dart';
 
-void main () {
-  runApp (ThirdLesson ());
+void main() {
+  runApp(ThirdLesson());
 }
 
 class ThirdLesson extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: BackGroundAssetImage (),
+      home: BackGroundAssetImage(),
     );
   }
 }
 
 class HomePage extends StatelessWidget {
   @override
-  Widget build (BuildContext context) {
-    return  Scaffold(
-      appBar: AppBar(), // da el header bta3 el application el hwa byb2a fo2 keda
-      drawer: Drawer(), // el hya el list el 3l shmal el bndos 3leha 34an nla2y gowa settings w profile w el klam da
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar:
+          AppBar(), // da el header bta3 el application el hwa byb2a fo2 keda
+      drawer:
+          Drawer(), // el hya el list el 3l shmal el bndos 3leha 34an nla2y gowa settings w profile w el klam da
       body: Container(
         // color: Colors.lightBlue,
-        width: double.infinity, // ehna bn3ml keda lw 3auzen enna n5leh yakhud 7agm el shasha kolha
+        width: double
+            .infinity, // ehna bn3ml keda lw 3auzen enna n5leh yakhud 7agm el shasha kolha
         height: 100,
         child: Text(
-          "This is a new Container in which we insert data" ,
-        style: TextStyle(
-            fontSize: 30,
-            fontWeight: FontWeight.bold,
-            color: Colors.white),
+          "This is a new Container in which we insert data",
+          style: TextStyle(
+              fontSize: 30, fontWeight: FontWeight.bold, color: Colors.white),
         ),
-        
-        margin: EdgeInsets.only(left: 10, right:15, top: 20, bottom: 50), // de aktur wahda fehom bt2dr tt7km feha , w mn ahsnhom fa hawl dayman test5dmha
-        padding: EdgeInsets.only(left:10, right: 5),
-        decoration: BoxDecoration (
+
+        margin: EdgeInsets.only(
+            left: 10,
+            right: 15,
+            top: 20,
+            bottom:
+                50), // de aktur wahda fehom bt2dr tt7km feha , w mn ahsnhom fa hawl dayman test5dmha
+        padding: EdgeInsets.only(left: 10, right: 5),
+        decoration: BoxDecoration(
           color: Colors.blueAccent, // da lon el box nfso msh el text
           border: Border.all(
-              color: Colors.blueGrey,
-              width: 10,
-              style: BorderStyle.solid
-          ),
-          borderRadius: BorderRadius.only(  bottomLeft: Radius.circular(40), topRight: Radius.circular(40)), // de 3n tre2ha b2dr a5ly el container 3la shkl oven bdl el rectange
+              color: Colors.blueGrey, width: 10, style: BorderStyle.solid),
+          borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(40),
+              topRight: Radius.circular(
+                  40)), // de 3n tre2ha b2dr a5ly el container 3la shkl oven bdl el rectange
           // borderRadius: BorderRadius.circular(20),  // 34an tst5dmha lazm tkon 3aml uniform boarder el hwa -> all
         ),
       ),
@@ -48,37 +54,37 @@ class HomePage extends StatelessWidget {
   }
 }
 
-
 class BackGroundNetworkImage extends StatelessWidget {
   @override
-  Widget build (BuildContext context) {
-    return Scaffold (
+  Widget build(BuildContext context) {
+    return Scaffold(
       appBar: AppBar(),
       drawer: Drawer(),
       body: Container(
-        child: Text("The Main String",
+        child: Text(
+          "New String",
           style: TextStyle(
               color: Colors.white,
-              shadows: [Shadow(
-                color: Colors.redAccent,
-                blurRadius: 10,
-                offset: Offset(10 ,20),
-              )],
+              shadows: [
+                Shadow(
+                  color: Colors.redAccent,
+                  blurRadius: 10,
+                  offset: Offset(10, 20),
+                )
+              ],
               fontSize: 20,
-              backgroundColor: Colors.teal
-          ),
+              backgroundColor: Colors.teal),
         ),
-
         height: 300,
         width: 300,
         margin: EdgeInsets.all(40),
         padding: EdgeInsets.all(10),
         decoration: BoxDecoration(
-          image: DecorationImage (
-            fit: BoxFit.cover, // de bt5ly el sora tkhud el msa7a bta3t el sora kolaaha
+          image: DecorationImage(
+            fit: BoxFit
+                .cover, // de bt5ly el sora tkhud el msa7a bta3t el sora kolaaha
             image: NetworkImage(
-                'https://play-lh.googleusercontent.com/aFWiT2lTa9CYBpyPjfgfNHd0r5puwKRGj2rHpdPTNrz2N9LXgN_MbLjePd1OTc0E8Rl1'
-            ),
+                'https://play-lh.googleusercontent.com/aFWiT2lTa9CYBpyPjfgfNHd0r5puwKRGj2rHpdPTNrz2N9LXgN_MbLjePd1OTc0E8Rl1'),
           ),
         ),
       ),
@@ -86,40 +92,39 @@ class BackGroundNetworkImage extends StatelessWidget {
   }
 }
 
-
-
 class BackGroundAssetImage extends StatelessWidget {
   @override
-  Widget build (BuildContext context) {
-    return Scaffold (
+  Widget build(BuildContext context) {
+    return Scaffold(
       appBar: AppBar(),
       drawer: Drawer(),
       body: Container(
-        child: Text("The Main String",
+        child: Text(
+          "BomBooom",
           style: TextStyle(
               color: Colors.white,
-              shadows: [Shadow(
-                color: Colors.redAccent,
-                blurRadius: 10,
-                offset: Offset(10 ,20),
-              )],
+              shadows: [
+                Shadow(
+                  color: Colors.redAccent,
+                  blurRadius: 10,
+                  offset: Offset(10, 20),
+                )
+              ],
               fontSize: 20,
-              backgroundColor: Colors.teal
-          ),
+              backgroundColor: Colors.teal),
         ),
-
         height: 200,
         width: 400,
         margin: EdgeInsets.all(40),
         padding: EdgeInsets.all(10),
         decoration: BoxDecoration(
           color: Colors.red,
-          image: DecorationImage (
-            fit: BoxFit.contain, // de bt5ly el sora tkhud el msa7a bta3t el sora kolaaha
-            image: AssetImage(
-                  'assets/Google.png'
-            ),
-            repeat: ImageRepeat.repeat, // de 34an el sora lw mkfetsh 3la mostawa el size yefdl yekrrha 3la el Y axis
+          image: DecorationImage(
+            fit: BoxFit
+                .contain, // de bt5ly el sora tkhud el msa7a bta3t el sora kolaaha
+            image: AssetImage('assets/Google.png'),
+            repeat: ImageRepeat
+                .repeat, // de 34an el sora lw mkfetsh 3la mostawa el size yefdl yekrrha 3la el Y axis
           ),
         ),
       ),
