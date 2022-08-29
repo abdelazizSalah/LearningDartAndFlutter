@@ -1,6 +1,6 @@
+import 'package:first_project/Result.dart';
 import 'package:flutter/material.dart';
-import 'Questions.dart';
-import 'Answers.dart';
+import 'Quiz.dart';
 
 //now this file is the common denominator of the other utility widgets which are the
 //Questions and the Answer widget
@@ -34,41 +34,67 @@ class QuizClass extends StatefulWidget {
 // this is how we connect the state class to the widget i want
 // as State is a generic class so we can send to it my customized data type
 class HomePage extends State<QuizClass> {
-  int questionsCntr = 0;
+  void TheQuestionSolutions(int score) {
+    // this will print it in the console not in the UI but we can the properties of the class
+    // in order to be able to use dynamic values
+    _totalScore += score;
+    setState(() {
+      _questionsCntr += 1;
+    });
+  }
 
-  static const List<Map> questions = [
+  void _resetQuiz() {
+    setState(() {
+      _questionsCntr = 0;
+      _totalScore = 0;
+    });
+  }
+
+  int _totalScore = 0;
+  int _questionsCntr = 0;
+
+  /**
+   * I will judge the person by how strange he is -> more dark person gets higher score
+   */
+  static const List<Map> _questionList = [
     {
       "QuestionText": "What's your favorite color?",
-      "Answers": ["Red", "Green", "Blue", "Black"]
+      "Answers": [
+        {"text": "Red", "Score": 7},
+        {"text": "White", "Score": 1},
+        {"text": "Black", "Score": 10},
+        {"text": "Green", "Score": 5},
+      ]
     },
     {
       "QuestionText": "What's your favorite animal?",
-      "Answers": ["Cat", "Dog", "Lion", "Bear"]
-    },
-    {
-      "QuestionText": "Who's your favorite player?",
-      "Answers": ["Messi", "Ronaldo", "Benzema", "Salah"]
-    },
-    {
-      "QuestionText": "What's your Hobby?",
       "Answers": [
-        "Reading",
-        "Writing",
-        "Coding",
-        "Playing FootBall",
-        "Traveling",
-        "Music"
+        {"text": "Lion", "Score": 7},
+        {"text": "Bear", "Score": 10},
+        {"text": "Cat", "Score": 1},
+        {"text": "Dog", "Score": 5},
+      ]
+    },
+    {
+      "QuestionText": "Who's your favorite type of movies?",
+      "Answers": [
+        {"text": "Tragedy", "Score": 7},
+        {"text": "Science-Fiction", "Score": 5},
+        {"text": "Comedy", "Score": 1},
+        {"text": "Action", "Score": 10},
+      ]
+    },
+    {
+      "QuestionText": "Which of these words describes you the best?",
+      "Answers": [
+        {"text": "Arogant", "Score": 10},
+        {"text": "extrovert", "Score": 1},
+        {"text": "Crazy", "Score": 5},
+        {"text": "introvert", "Score": 3},
+        {"text": "Lazy", "Score": 7},
       ]
     }
   ];
-
-  void TheQuestionSolutions() {
-    // this will print it in the console not in the UI but we can the properties of the class
-    // in order to be able to use dynamic values
-    setState(() {
-      questionsCntr = (questionsCntr + 1) % 4;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +102,7 @@ class HomePage extends State<QuizClass> {
         appBar: AppBar(
           // this is to center the title ;)
           centerTitle: true,
-          title: Text(
+          title: const Text(
             // "Personality Quiz!",
             "Personality Quiz!",
             style: TextStyle(
@@ -94,41 +120,11 @@ class HomePage extends State<QuizClass> {
           ),
         ),
         // drawer: Drawer(),
-        body: Container(
-          child: Column(
-            children: [
-              // this is how we can call another widget by using its constructor
-              Questions(questions[questionsCntr]["QuestionText"]),
-
-              /**
-           * HardCoding our answer
-           */
-              // Answer(
-              //     questions[questionsCntr]["Answers"][0], TheQuestionSolutions),
-              // Answer(
-              //     questions[questionsCntr]["Answers"][1], TheQuestionSolutions),
-              // Answer(
-              //     questions[questionsCntr]["Answers"][2], TheQuestionSolutions),
-              // Answer(
-              //     questions[questionsCntr]["Answers"][3], TheQuestionSolutions),
-
-              /**
-             * to make it dynamically we can use the map method
-             * 
-             * iterate over all the answers and send them to the Answer constructor and return an Answer objects as list 
-             * after that use the spread operator in order to be able to spread them as children for the container :).
-             */
-
-              ...(questions[questionsCntr]['Answers'] as List<String>)
-                  .map((ans) {
-                return Answer(ans, TheQuestionSolutions);
-              }).toList()
-            ],
-          ),
-          decoration: BoxDecoration(
-              color: Colors.blueGrey,
-              border: Border.all(color: Colors.blueGrey, width: 5)),
-        ));
+        //this is how we can display widgets conditionally :)
+        body: _questionsCntr < _questionList.length
+            ? Quiz(_questionList, _questionsCntr, TheQuestionSolutions)
+            // ignore: prefer_const_constructors
+            : Result(_totalScore, _resetQuiz));
   }
 }
 

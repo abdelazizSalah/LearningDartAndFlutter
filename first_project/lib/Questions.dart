@@ -1,18 +1,13 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-/**
- * The idea from this class is to split your app into separated widgets which is
- * the good practice. 
- * 
- */
+///The idea from this class is to split your app into separated widgets which is
+/// the good practice.
 
 class Questions extends StatelessWidget {
-  /**
-   *  it is prefered to set its parameters as final becuase we shouldn't change their
-   *  values inside the class, so whenever they take their initial values we should
-   *  not assign them again  
-   * */
+  //  it is prefered to set its parameters as final becuase we shouldn't change their
+  //  values inside the class, so whenever they take their initial values we should
+  //  not assign them again
+
   final String questionText;
 
   // this is the constructor of the class where we take the input data to the class
@@ -22,9 +17,18 @@ class Questions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      //only is a special constructor for EdgeInsets class
+      // also other options are constructors -> all, LTRB, symmetric and so on
+      margin: EdgeInsets.only(top: 20),
+
+      // if you have not set the width and height it will be automaticaly set as
+      // the size of the items inserted
+      width: double.infinity,
+      // height: double.infinity,
+
       child: Text(
         questionText,
-        style: TextStyle(
+        style: const TextStyle(
           color: Colors.amber,
           fontSize: 20,
           fontWeight: FontWeight.bold,
@@ -34,15 +38,6 @@ class Questions extends StatelessWidget {
         // this align the design where you want either left, right or at center
         textAlign: TextAlign.center,
       ),
-
-      //only is a special constructor for EdgeInsets class
-      // also other options are constructors -> all, LTRB, symmetric and so on
-      margin: EdgeInsets.only(top: 20),
-
-      // if you have not set the width and height it will be automaticaly set as
-      // the size of the items inserted
-      width: double.infinity,
-      // height: double.infinity,
     );
   }
 }
