@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'Questions.dart';
+import 'Answers.dart';
 
+//now this file is the common denominator of the other utility widgets which are the
+//Questions and the Answer widget
 void main() {
   runApp(PersonalityJudge());
 }
@@ -30,35 +34,55 @@ class QuizClass extends StatefulWidget {
 // this is how we connect the state class to the widget i want
 // as State is a generic class so we can send to it my customized data type
 class HomePage extends State<QuizClass> {
-  String _appName = "";
   int questionsCntr = 0;
 
-  List<String> Questions = [
-    "What's your favorite color?",
-    "What's your favorite animal?"
+  static const List<Map> questions = [
+    {
+      "QuestionText": "What's your favorite color?",
+      "Answers": ["Red", "Green", "Blue", "Black"]
+    },
+    {
+      "QuestionText": "What's your favorite animal?",
+      "Answers": ["Cat", "Dog", "Lion", "Bear"]
+    },
+    {
+      "QuestionText": "Who's your favorite player?",
+      "Answers": ["Messi", "Ronaldo", "Benzema", "Salah"]
+    },
+    {
+      "QuestionText": "What's your Hobby?",
+      "Answers": [
+        "Reading",
+        "Writing",
+        "Coding",
+        "Playing FootBall",
+        "Traveling",
+        "Music"
+      ]
+    }
   ];
+
   void TheQuestionSolutions() {
     // this will print it in the console not in the UI but we can the properties of the class
     // in order to be able to use dynamic values
     setState(() {
-      questionsCntr = (questionsCntr + 1) % 2;
+      questionsCntr = (questionsCntr + 1) % 4;
     });
   }
-
-  void answerQuestion1() => _appName += '1';
-  void answerQuestion2() => _appName += '2';
-  void answerQuestion3() => _appName += '3';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          // this is to center the title ;)
+          centerTitle: true,
           title: Text(
             // "Personality Quiz!",
-            _appName,
+            "Personality Quiz!",
             style: TextStyle(
+                decoration: TextDecoration.underline,
                 fontWeight: FontWeight.bold,
-                fontSize: 20,
+                fontSize: 25,
                 color: Colors.white,
                 shadows: [
                   Shadow(
@@ -66,33 +90,44 @@ class HomePage extends State<QuizClass> {
                     blurRadius: 20, // this makes the text shines :D
                   )
                 ]),
+            textAlign: TextAlign.center,
           ),
         ),
-        drawer: Drawer(),
-        body: Column(
-          children: [
-            Text(
-              Questions[questionsCntr],
-              style: TextStyle(fontSize: 20, color: Colors.amber),
-            ),
-            RaisedButton(
-              child: Text('Answer 1'),
-              onPressed:
-                  answerQuestion1, // ehna bnb3t esm el function bs msh bn3mlha call, 34an fe ay w2t ndos el onpress hya el btro7 te3ml excute
-            ),
-            RaisedButton(
-              child: Text('Answer 2'),
-              onPressed: (() => {answerQuestion2()}),
-            ),
-            RaisedButton(
-              child: Text('Answer 3'),
-              onPressed: ((() => answerQuestion3())),
-            ),
-            RaisedButton(
-              child: Text('The Solution'),
-              onPressed: ((() => TheQuestionSolutions())),
-            ),
-          ],
+        // drawer: Drawer(),
+        body: Container(
+          child: Column(
+            children: [
+              // this is how we can call another widget by using its constructor
+              Questions(questions[questionsCntr]["QuestionText"]),
+
+              /**
+           * HardCoding our answer
+           */
+              // Answer(
+              //     questions[questionsCntr]["Answers"][0], TheQuestionSolutions),
+              // Answer(
+              //     questions[questionsCntr]["Answers"][1], TheQuestionSolutions),
+              // Answer(
+              //     questions[questionsCntr]["Answers"][2], TheQuestionSolutions),
+              // Answer(
+              //     questions[questionsCntr]["Answers"][3], TheQuestionSolutions),
+
+              /**
+             * to make it dynamically we can use the map method
+             * 
+             * iterate over all the answers and send them to the Answer constructor and return an Answer objects as list 
+             * after that use the spread operator in order to be able to spread them as children for the container :).
+             */
+
+              ...(questions[questionsCntr]['Answers'] as List<String>)
+                  .map((ans) {
+                return Answer(ans, TheQuestionSolutions);
+              }).toList()
+            ],
+          ),
+          decoration: BoxDecoration(
+              color: Colors.blueGrey,
+              border: Border.all(color: Colors.blueGrey, width: 5)),
         ));
   }
 }
