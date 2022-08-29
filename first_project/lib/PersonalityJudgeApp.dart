@@ -78,8 +78,9 @@ class HomePage extends State<QuizClass> {
     {
       "QuestionText": "Who's your favorite type of movies?",
       "Answers": [
-        {"text": "Tragedy", "Score": 7},
-        {"text": "Science-Fiction", "Score": 5},
+        {"text": "Tragedy", "Score": 5},
+        {"text": "Horro", "Score": 7},
+        {"text": "Science-Fiction", "Score": 3},
         {"text": "Comedy", "Score": 1},
         {"text": "Action", "Score": 10},
       ]
