@@ -25,12 +25,24 @@ class MainPage extends StatelessWidget {
       ),
       body: Column(children: [
         Container(
+            margin: EdgeInsets.only(bottom: 50, top: 50),
+            width: 400,
+            child: Center(
+                child: Text(
+              "Traffic Sign",
+              style: TextStyle(
+                  fontSize: 20,
+                  shadows: [Shadow(blurRadius: 50, color: Colors.black)]),
+            ))),
+        Container(
+          margin: EdgeInsets.only(bottom: 50),
+          height: 100,
           width: 400,
           child: ElevatedButton(
             onPressed: () {
-              print("HelloWorld!");
+              print("Stop!");
             },
-            child: Text("Elevated Button"),
+            child: Text("Stop!"),
             // style: ButtonStyle(
             //   backgroundColor: MaterialStateProperty.all(Colors.red),
             //   foregroundColor: MaterialStateProperty.all(Colors.amber),
@@ -47,12 +59,14 @@ class MainPage extends StatelessWidget {
           /**
            * The primary item here is the text not the background
            */
-          width: 300,
+          height: 100,
+          width: 400,
+          margin: EdgeInsets.only(bottom: 50),
           child: TextButton(
             onPressed: () {
-              print("TextButton!");
+              print("Be prepared!");
             },
-            child: Text("Text Button"),
+            child: Text("Be prepared"),
             // style: ButtonStyle(
             //   backgroundColor: MaterialStateProperty.all(Colors.red),
             //   foregroundColor: MaterialStateProperty.all(Colors.amber),
@@ -69,11 +83,13 @@ class MainPage extends StatelessWidget {
           /**
            * The primary item here is the text not the background
            */
+          width: 400,
+          height: 100,
           child: OutlinedButton(
             onPressed: () {
-              print("OutLinedButton!");
+              print("Go!");
             },
-            child: Text("OutLined Button"),
+            child: Text("Go!"),
             // style: ButtonStyle(
             //   backgroundColor: MaterialStateProperty.all(Colors.red),
             //   foregroundColor: MaterialStateProperty.all(Colors.amber),
