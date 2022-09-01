@@ -25,14 +25,17 @@ class MainPage extends StatelessWidget {
       ),
       body: Column(children: [
         Container(
-            margin: EdgeInsets.only(bottom: 50, top: 50),
+            margin: EdgeInsets.only(bottom: 50, top: 50, left: 30, right: 50),
+            padding: EdgeInsets.all(30),
             width: 400,
+            height: 100,
             child: Center(
                 child: Text(
               "Traffic Sign",
               style: TextStyle(
+                  color: Colors.red,
                   fontSize: 20,
-                  shadows: [Shadow(blurRadius: 50, color: Colors.black)]),
+                  shadows: [Shadow(blurRadius: 50, color: Colors.red)]),
             ))),
         Container(
           margin: EdgeInsets.only(bottom: 50),
@@ -42,7 +45,7 @@ class MainPage extends StatelessWidget {
             onPressed: () {
               print("Stop!");
             },
-            child: Text("Stop!"),
+            child: Text("Stop!", style: TextStyle(fontSize: 20)),
             // style: ButtonStyle(
             //   backgroundColor: MaterialStateProperty.all(Colors.red),
             //   foregroundColor: MaterialStateProperty.all(Colors.amber),

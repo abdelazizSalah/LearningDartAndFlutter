@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "name": "Flutter (lib\\OldButtonsVsNewButtons.dart)",
+            "type": "dart",
+            "request": "launch",
+            "cwd": "first_project",
+            "program": "lib\\OldButtonsVsNewButtons.dart"
+        }
+    ]
+}
