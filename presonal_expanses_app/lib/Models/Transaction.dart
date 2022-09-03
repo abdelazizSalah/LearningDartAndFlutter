@@ -1,7 +1,7 @@
 // this is the file which contains the decoration @required <-
 import 'package:flutter/foundation.dart';
 
-class Transactoin {
+class Transaction {
   final String id;
   final String title;
   final double amount;
@@ -10,7 +10,7 @@ class Transactoin {
 
   /// required means that this parameter must take a value during the initialization
   /// when we use it with final keyword
-  Transactoin({
+  Transaction({
     required this.id,
     required this.title,
     required this.amount,

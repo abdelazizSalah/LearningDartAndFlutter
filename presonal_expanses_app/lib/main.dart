@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
-import './Transaction.dart';
+import 'package:presonal_expanses_app/Widgets/InputFields.dart';
 import 'package:intl/intl.dart';
+import 'package:presonal_expanses_app/Widgets/newTransactions.dart';
+import './Widgets/Charts.dart';
+import './Widgets/Txs.dart';
+import './Models/Transaction.dart';
 
 void main() {
   runApp(PersonalExpanses());
@@ -11,119 +15,13 @@ class PersonalExpanses extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: FirstPage(),
+      home: MainPage(),
     );
   }
 }
 
-class FirstPage extends StatelessWidget {
-  List<Transactoin> transactions = [
-    Transactoin(
-        id: "t1",
-        title: "New Shoes",
-        amount: 99.99,
-        currancy: '\$',
-        date: DateTime.now()),
-    Transactoin(
-        id: "t2",
-        title: "SunGlasses",
-        amount: 265.50,
-        currancy: 'EGP ',
-        date: DateTime.now()),
-    Transactoin(
-        id: "t3",
-        title: "LapTop",
-        amount: 142,
-        currancy: 'Euro ',
-        date: DateTime.now()),
-    Transactoin(
-        id: "t4",
-        title: "Iphone",
-        amount: 942.432,
-        currancy: '\$',
-        date: DateTime.now()),
-    Transactoin(
-        id: "t5",
-        title: "Watch",
-        amount: 900,
-        currancy: 'Euro ',
-        date: DateTime.now()),
-    // Transactoin(
-    //     id: "t6",
-    //     title: "TV",
-    //     amount: 4354.223,
-    //     currancy: 'EGP ',
-    //     date: DateTime.now()),
-    // Transactoin(
-    //     id: "t7",
-    //     title: "Table",
-    //     amount: 42121,
-    //     currancy: 'EGP ',
-    //     date: DateTime.now()),
-    // Transactoin(
-    //     id: "t8",
-    //     title: "Bed",
-    //     amount: 2343,
-    //     currancy: '\$',
-    //     date: DateTime.now()),
-    // Transactoin(
-    //     id: "t8",
-    //     title: "Chair",
-    //     amount: 322,
-    //     currancy: 'EGP ',
-    //     date: DateTime.now())
-  ];
-
-  int get TransLen {
-    return transactions.length;
-  }
-
-  String titleInput = "";
-  double priceInput = 0.0;
-  String currancyInput = "";
-  DateTime DateInput = DateTime.now();
-
-  //we use these in order to use the listners
-  final titleController = TextEditingController();
-  final amountController = TextEditingController();
-  final dateController = TextEditingController();
-  final currancyController = TextEditingController();
-
-  void ChangeTitle(String title) {
-    titleInput = title;
-    print(titleInput);
-  }
-
-  void ChangePrice(String price) {
-    priceInput = double.parse(price);
-    print(priceInput);
-  }
-
-  void ChangeCurrancy(String curr) {
-    currancyInput = curr;
-    print(currancyInput);
-  }
-
-  void ChangeDate(String date) {
-    DateInput = DateTime.now();
-    print(DateFormat.yMMMd().format(DateInput));
-  }
-
-  void printAllData() {
-    print(
-        "title = $titleInput\nprice = ${currancyInput + priceInput.toString()}\nDate = ${DateFormat.yMMMd().format(DateInput)}");
-  }
-
-  void addTransaction(String title, double price, String curr, DateTime date) {
-    Transactoin trans = Transactoin(
-        id: "T${TransLen + 1}",
-        amount: price,
-        currancy: curr,
-        date: date,
-        title: title);
-    transactions.add(trans);
-  }
-
+class MainPage extends StatelessWidget {
+  //main build function
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -137,166 +35,33 @@ class FirstPage extends StatelessWidget {
         ),
       ),
       body: Container(
+        // height: double.infinity,
         height: double.infinity,
         width: double.infinity,
-        color: Color.fromARGB(255, 4, 155, 120),
-        child: Column(
-            // mainAxisAlignment: MainAxisAlignment.spaceAround,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            // mainAxisSize: MainAxisSize.max,
+        color: Color.fromARGB(255, 13, 127, 172),
 
-            children: [
-              Container(
-                // alignment: Alignment.topCenter,
-                // height: 100,
-                // width: 300,
-                child: Card(
-                  borderOnForeground: true,
-                  child: Text("This is the Chart"),
-                  clipBehavior: Clip.antiAlias,
-                ),
-              ),
-              Card(
-                elevation: 10,
-                child: Container(
-                  margin: EdgeInsets.only(left: 10),
-                  child: Column(
-                    children: [
-                      TextField(
-                        decoration: InputDecoration(labelText: "price"),
-
-                        /// here in the price on submit will be better to be able to parse the whole price
-                        /// at the end once
-                        // onSubmitted: ChangePrice,
-                        controller: amountController,
-                      ),
-                      TextField(
-                        decoration: InputDecoration(labelText: "Title"),
-                        onChanged: ChangeTitle,
-                      ),
-                      TextField(
-                        decoration: InputDecoration(labelText: "currancy"),
-                        onChanged: ChangeCurrancy,
-                      ),
-                      TextField(
-                        decoration: InputDecoration(labelText: "Date"),
-                        onSubmitted: ChangeDate,
-                      ),
-                      ElevatedButton(
-                          // onPressed: (String id, String title, double amount, String currancy, DateTime date) {
-                          //   Transactoin tx = Transactoin(id: id, title: title, amount: amount, currancy: currancy, date: date)
-                          //   transactions.add(tx);
-                          // },
-                          onPressed: () {
-                            // this is how we can use the controllers instead of creating data members and methods manually
-                            print(amountController.text);
-                          },
-                          child: Text("Add"))
-                    ],
-                  ),
-                ),
-              ),
-              Container(
-                width: 300,
-                // height: 550,
-                child: Card(
-                  child: Column(children: [
-                    //now we need to use the map function in order to return a list of cards
-                    ...(transactions as List<Transactoin>).map((trans) {
-                      return Container(
-                        height: 60,
-                        child: Card(
-                          elevation: 20,
-                          shadowColor: Colors.amberAccent,
-                          color: Colors.black54,
-                          child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Container(
-                                  padding: EdgeInsets.symmetric(
-                                      vertical: 5, horizontal: 3),
-                                  decoration: BoxDecoration(
-                                      border: Border.all(
-                                          style: BorderStyle.solid,
-                                          color: Colors.amber,
-                                          width: 3)),
-                                  child: Row(children: [
-                                    Text(
-                                      trans.currancy,
-                                      style: TextStyle(
-                                          color: Colors.amber,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 17),
-                                    ),
-                                    Text(
-                                      "${trans.amount}",
-                                      style: TextStyle(
-                                          decoration:
-                                              TextDecoration.lineThrough,
-                                          color: Colors.amber,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 17),
-                                    )
-                                  ]),
-                                ),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Container(
-                                      child: Text(
-                                        trans.title,
-                                        // textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                            // backgroundColor: Colors.white,
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 17),
-                                      ),
-                                    ),
-                                    Container(
-                                      child: Text(
-                                        // textAlign: TextAlign.center,
-                                        //this is the normal way or the manual one
-                                        // "${trans.date.day.toString() + "/" + trans.date.month.toString() + "/" + trans.date.year.toString()} ",
-                                        //while this is the automatic version using the intl package :)
-                                        // there is a difference between small letters and capitals
-                                        // see the documentations at https://pub.dev/documentation/intl/latest/
-                                        // DateFormat('dd/MM/yyyy')
-                                        //     .format(trans.date),
-                                        DateFormat.yMMMd().format(trans.date),
-                                        style: TextStyle(
-                                            decoration:
-                                                TextDecoration.underline,
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 17),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ]),
-                        ),
-                      );
-                    }).toList(),
-                  ]),
-                ),
-              )
-            ]),
+        /// I made it here to be able to scroll the whole page
+        // child: SingleChildScrollView(
+        child: ListView.builder(
+          itemBuilder: (ctx, index) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Charts(),
+                /**
+                   * 34an t5ly subwidget hya el scrollable lazm t3ml specific height 
+                   * and width, w da 34an t2ol le el Scrollable function wlahy lw el 
+                   * height zad 3n kaza w el width zad 3n kaza khlas ebd2 scroll. 
+                   * but here we can get the problem of poping up the keyboard it 
+                   * will cause an overflow 
+                   */
+                Container(height: 600, child: NewTransactions())
+              ],
+            );
+          },
+          itemCount: 1,
+        ),
       ),
-    );
-  }
-}
-
-class HomePage extends StatefulWidget {
-  @override
-  State<HomePage> createState() => _HomePage();
-}
-
-class _HomePage extends State<HomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text("Welcome to our new application!")),
     );
   }
 }
