@@ -28,10 +28,8 @@ class Answer extends StatelessWidget {
         width: 300,
         height: 60,
         margin: EdgeInsets.all(20),
-        child: RaisedButton(
+        child: ElevatedButton(
           onPressed: functionHandler,
-          textColor: c1,
-          color: Colors.blue,
           child: Text(answer),
         ));
   }

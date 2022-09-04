@@ -11,8 +11,10 @@ class Quiz extends StatelessWidget {
 
   //@required means that we must send them in the constructor we can't neglect any value of them
   // it is a decorator
-  const Quiz(@required this.questions, @required this.questionsCntr,
-      @required this.TheQuestionSolutions);
+  const Quiz(
+      {required this.questions,
+      required this.questionsCntr,
+      required this.TheQuestionSolutions});
   @override
   Widget build(BuildContext context) {
     return Container(

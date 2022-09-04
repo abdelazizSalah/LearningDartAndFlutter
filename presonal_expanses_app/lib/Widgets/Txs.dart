@@ -10,7 +10,7 @@ class Txs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 300,
+      height: 600,
       child: ListView.builder(
         itemCount: transactions.length,
         itemBuilder: (context, index) {

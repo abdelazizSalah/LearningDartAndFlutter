@@ -47,7 +47,7 @@ class Result extends StatelessWidget {
               ),
               Container(
                 margin: EdgeInsets.only(top: 25),
-                child: FlatButton(
+                child: TextButton(
                   child: Text(
                     'Restart Quiz!',
                     style: TextStyle(
