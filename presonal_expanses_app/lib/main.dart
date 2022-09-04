@@ -13,9 +13,25 @@ class PersonalExpanses extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: MainPage(),
-    );
+
+        /// this title is what you see when the program is
+        /// running in the background mode or the name in the
+        /// task manager window
+        title: "Personal Expanses",
+        debugShowCheckedModeBanner: false,
+        home: MainPage(),
+
+        /// this is how we can set a theme for the whole program
+        theme: ThemeData(
+            primarySwatch: Colors.indigo,
+            accentColor: Colors.amber,
+            fontFamily: 'OpenSans',
+            appBarTheme: AppBarTheme(
+                titleTextStyle: TextStyle(
+              fontFamily: 'DancingScript',
+              fontSize: 30,
+              shadows: [Shadow(blurRadius: 40, color: Colors.white)],
+            ))));
   }
 }
 
@@ -58,18 +74,78 @@ class _MainPageState extends State<MainPage> {
         amount: 99.99,
         currancy: '\$',
         date: DateTime.now()),
+    Transaction(
+        id: "t1",
+        title: "New Shoes",
+        amount: 99.99,
+        currancy: '\$',
+        date: DateTime.now()),
+    Transaction(
+        id: "t1",
+        title: "New Shoes",
+        amount: 99.99,
+        currancy: '\$',
+        date: DateTime.now()),
+    Transaction(
+        id: "t1",
+        title: "New Shoes",
+        amount: 99.99,
+        currancy: '\$',
+        date: DateTime.now()),
+    Transaction(
+        id: "t1",
+        title: "New Shoes",
+        amount: 99.99,
+        currancy: '\$',
+        date: DateTime.now()),
+    Transaction(
+        id: "t1",
+        title: "New Shoes",
+        amount: 99.99,
+        currancy: '\$',
+        date: DateTime.now()),
+    Transaction(
+        id: "t1",
+        title: "New Shoes",
+        amount: 99.99,
+        currancy: '\$',
+        date: DateTime.now()),
+    Transaction(
+        id: "t1",
+        title: "New Shoes",
+        amount: 99.99,
+        currancy: '\$',
+        date: DateTime.now()),
+    Transaction(
+        id: "t1",
+        title: "New Shoes",
+        amount: 99.99,
+        currancy: '\$',
+        date: DateTime.now()),
   ];
 
   void addTransaction() {
     Transaction trans = Transaction(
         id: "T${transactions.length + 1}",
-        amount: priceInput,
+        amount: double.parse(amountController.text),
         currancy: currancyInput,
         date: DateInput,
         title: titleInput);
 
     setState(() {
       transactions.add(trans);
+    });
+
+    /// this is how we can close the showmodalbottomsheet
+    /// after submiting certain object
+    /// context is special property like widget in the state class
+    /// it gives you access to the whole context of the widget you are in.
+    Navigator.of(context).pop();
+  }
+
+  void clearTransactions() {
+    setState(() {
+      transactions.clear();
     });
   }
 
@@ -79,6 +155,7 @@ class _MainPageState extends State<MainPage> {
         builder: (bCtx) {
           return GestureDetector(
             child: InputFields(
+                clearTransaction: clearTransactions,
                 ChangeTitle: ChangeTitle,
                 ChangeCurrancy: ChangeCurrancy,
                 ChangeDate: ChangeDate,
@@ -96,25 +173,24 @@ class _MainPageState extends State<MainPage> {
       appBar: AppBar(
         actions: [
           IconButton(
-            icon: Icon(Icons.add),
+            icon: Icon(Icons.layers_clear_sharp),
             onPressed: () {
-              ShowTheInputArea(context);
+              clearTransactions();
             },
           )
         ],
         centerTitle: true,
         title: Text(
           "Personal Expanses",
-          style: TextStyle(shadows: [
-            Shadow(blurRadius: 30, color: Colors.white, offset: Offset(10, 10))
-          ], fontSize: 25.7),
+          style: Theme.of(context).appBarTheme.titleTextStyle,
         ),
       ),
       body: Container(
         // height: double.infinity,
         height: double.infinity,
         width: double.infinity,
-        color: Color.fromARGB(255, 13, 127, 172),
+        // color: Color.fromARGB(255, 13, 127, 172),
+        // color: Theme.of(context).primaryColorLight,
 
         /// I made it here to be able to scroll the whole page
         // child: SingleChildScrollView(
@@ -123,7 +199,7 @@ class _MainPageState extends State<MainPage> {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Charts(),
+                Charts(transactions),
                 /**
                    * 34an t5ly subwidget hya el scrollable lazm t3ml specific height 
                    * and width, w da 34an t2ol le el Scrollable function wlahy lw el 
@@ -147,9 +223,9 @@ class _MainPageState extends State<MainPage> {
           FloatingActionButtonLocation.miniCenterFloat,
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        hoverColor: Colors.amber[900],
-        focusColor: Colors.amber[900],
-        backgroundColor: Color.fromARGB(255, 255, 102, 0),
+        // hoverColor: Colors.amber[900],
+        // focusColor: Colors.amber[900],
+        // backgroundColor: Color.fromARGB(255, 255, 102, 0),
         onPressed: () {
           ShowTheInputArea(context);
         },

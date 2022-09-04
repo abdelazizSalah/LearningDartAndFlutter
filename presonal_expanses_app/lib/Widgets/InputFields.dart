@@ -7,12 +7,14 @@ class InputFields extends StatelessWidget {
   final ChangeDate;
   final ChangePrice;
   final addTransaction;
+  final clearTransaction;
 
   const InputFields(
-      {required this.ChangeTitle,
+      {required this.amountController,
+      required this.ChangeTitle,
       required this.ChangeCurrancy,
+      required this.clearTransaction,
       required this.ChangeDate,
-      required this.amountController,
       required this.ChangePrice,
       required this.addTransaction});
 
@@ -27,10 +29,14 @@ class InputFields extends StatelessWidget {
             TextField(
               decoration: InputDecoration(labelText: "price"),
               keyboardType: TextInputType.number,
+              controller: amountController,
+              onSubmitted: (_) {
+                addTransaction();
+              },
 
               /// here in the price on submit will be better to be able to parse the whole price
               /// at the end once
-              onSubmitted: ChangePrice,
+              // onSubmitted: ChangePrice,
 
               //it should be on tap better but we will solve it later.
               // onTap: ChangePrice
@@ -38,25 +44,47 @@ class InputFields extends StatelessWidget {
             ),
             TextField(
               decoration: InputDecoration(labelText: "Title"),
+              onSubmitted: (_) {
+                addTransaction();
+              },
               onChanged: ChangeTitle,
             ),
             TextField(
               decoration: InputDecoration(labelText: "currancy"),
+              onSubmitted: (_) {
+                addTransaction();
+              },
               onChanged: ChangeCurrancy,
             ),
             TextField(
               decoration: InputDecoration(labelText: "Date"),
-              onSubmitted: ChangeDate,
+              onSubmitted: (_) {
+                addTransaction();
+              },
+              onChanged: ChangeDate,
             ),
-            ElevatedButton(
-                // onPressed: (String id, String title, double amount, String currancy, DateTime date) {
-                //   Transactoin tx = Transactoin(id: id, title: title, amount: amount, currancy: currancy, date: date)
-                //   transactions.add(tx);
-                // },
-                onPressed: () {
-                  addTransaction();
-                },
-                child: Text("Add"))
+            Row(
+              children: [
+                ElevatedButton(
+                    // onPressed: (String id, String title, double amount, String currancy, DateTime date) {
+                    //   Transactoin tx = Transactoin(id: id, title: title, amount: amount, currancy: currancy, date: date)
+                    //   transactions.add(tx);
+                    // },
+                    onPressed: () {
+                      addTransaction();
+                    },
+                    child: Text("Add")),
+                ElevatedButton(
+                    // onPressed: (String id, String title, double amount, String currancy, DateTime date) {
+                    //   Transactoin tx = Transactoin(id: id, title: title, amount: amount, currancy: currancy, date: date)
+                    //   transactions.add(tx);
+                    // },
+                    onPressed: () {
+                      clearTransaction();
+                    },
+                    child: Text("Clear")),
+              ],
+            )
           ],
         ),
       ),
