@@ -14,7 +14,6 @@ class Charts extends StatelessWidget {
     'Wed',
     'Thurs',
     'Fri',
-    "Vacation"
   ];
   Charts(this.recentTransactions);
 
