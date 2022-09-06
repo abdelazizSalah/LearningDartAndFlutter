@@ -4,8 +4,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import '../Models/Transaction.dart';
 
-
-
 class Charts extends StatelessWidget {
   final List<Transaction> recentTransactions;
   final List<String> Days = [
