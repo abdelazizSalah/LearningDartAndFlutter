@@ -10,7 +10,9 @@ class Txs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 540,
+      // color: Colors.amber,
+      height: 440,
+      // color: Colors.amber,
       child: transactions.isEmpty
           ? Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -24,10 +26,10 @@ class Txs extends StatelessWidget {
                 //   height: 20,
                 // ),
                 Container(
-                    height: 500,
+                    height: 360,
                     width: 400,
                     child: Image.asset('assets/imgs/image/waiting.png',
-                        fit: BoxFit.scaleDown))
+                        fit: BoxFit.contain))
               ],
             )
           : ListView.builder(

@@ -141,6 +141,8 @@ class _MainPageState extends State<MainPage> {
     /// context is special property like widget in the state class
     /// it gives you access to the whole context of the widget you are in.
     Navigator.of(context).pop();
+
+    /// need to know more about the navigator
   }
 
   void clearTransactions() {
@@ -150,10 +152,12 @@ class _MainPageState extends State<MainPage> {
   }
 
   void ShowTheInputArea(BuildContext ctx) {
+    /// need to know more about the showModalBottomSheet
     showModalBottomSheet(
         context: ctx,
         builder: (bCtx) {
           return GestureDetector(
+            /// still need to know more about this widget /// still need to know more about this widget
             child: InputFields(
                 clearTransaction: clearTransactions,
                 ChangeTitle: ChangeTitle,
@@ -166,26 +170,38 @@ class _MainPageState extends State<MainPage> {
         });
   }
 
+  List<Transaction> get _recentTxs {
+    return transactions.where((tx) {
+      return tx.date.isAfter(DateTime.now().subtract(Duration(days: 7)));
+    }).toList();
+  }
+
   //main build function
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        /// in order to set the floating button in the appbar we add the action
+        ///  parameter to the IconButton and set the constructor with our values
         actions: [
           IconButton(
-            icon: Icon(Icons.layers_clear_sharp),
-            onPressed: () {
-              clearTransactions();
-            },
-          )
+              icon: Icon(Icons.layers_clear_sharp),
+              onPressed: clearTransactions)
         ],
         centerTitle: true,
         title: Text(
           "Personal Expanses",
+
+          /// in order to set the style to the theme style we need to use the
+          /// Theme widget and choose the of constructor and send to it our
+          /// context of the main widget to be able to choose which
+          /// style from the theme we need to apply on the style
           style: Theme.of(context).appBarTheme.titleTextStyle,
         ),
       ),
       body: Container(
+        color: Color.fromARGB(255, 222, 230, 233),
+
         // height: double.infinity,
         height: double.infinity,
         width: double.infinity,
@@ -199,19 +215,15 @@ class _MainPageState extends State<MainPage> {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Charts(transactions),
+                Charts(_recentTxs),
                 /**
-                   * 34an t5ly subwidget hya el scrollable lazm t3ml specific height 
-                   * and width, w da 34an t2ol le el Scrollable function wlahy lw el 
-                   * height zad 3n kaza w el width zad 3n kaza khlas ebd2 scroll. 
-                   * but here we can get the problem of poping up the keyboard it 
-                   * will cause an overflow 
-                   */
-                // Container(
-                //     height: 600,
-                //     child: NewTransactions(
-                //       transactions: Txs,
-                //     ))
+               * 34an t5ly subwidget hya el scrollable lazm t3ml specific height 
+               * and width, w da 34an t2ol le el Scrollable function wlahy lw el 
+               * height zad 3n kaza w el width zad 3n kaza khlas ebd2 scroll. 
+               * but here we can get the problem of poping up the keyboard it 
+               * will cause an overflow 
+               */
+
                 Txs(transactions: transactions)
               ],
             );
