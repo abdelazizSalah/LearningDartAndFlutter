@@ -1,20 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class InputFields extends StatelessWidget {
   final ChangeTitle;
   final amountController;
+  final titleController;
   final ChangeCurrancy;
-  final ChangeDate;
   final ChangePrice;
   final addTransaction;
   final clearTransaction;
+  final clearAllEntries;
+  final datePicker;
+  final selectedDate;
 
   const InputFields(
-      {required this.amountController,
+      {required this.datePicker,
+      required this.amountController,
+      required this.titleController,
       required this.ChangeTitle,
       required this.ChangeCurrancy,
       required this.clearTransaction,
-      required this.ChangeDate,
+      required this.clearAllEntries,
+      required this.selectedDate,
       required this.ChangePrice,
       required this.addTransaction});
 
@@ -47,23 +54,31 @@ class InputFields extends StatelessWidget {
               onSubmitted: (_) {
                 addTransaction();
               },
-              onChanged: ChangeTitle,
+              controller: titleController,
             ),
-            TextField(
-              decoration: InputDecoration(labelText: "currancy"),
-              onSubmitted: (_) {
-                addTransaction();
-              },
-              onChanged: ChangeCurrancy,
-            ),
-            TextField(
-              decoration: InputDecoration(labelText: "Date"),
-              onSubmitted: (_) {
-                addTransaction();
-              },
-              onChanged: ChangeDate,
+            Container(
+              height: 70,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Text(selectedDate == DateTime(2022)
+                      ? "No Date Choosen"
+                      : "Picked date: ${DateFormat.yMMMd().format(selectedDate)}"),
+                  Container(
+                    margin: EdgeInsets.only(right: 20),
+                    child: TextButton(
+                        onPressed: datePicker,
+                        child: Text(
+                          "Pick a date",
+                          style: TextStyle(
+                              fontSize: 14.7, fontWeight: FontWeight.bold),
+                        )),
+                  )
+                ],
+              ),
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ElevatedButton(
                     // onPressed: (String id, String title, double amount, String currancy, DateTime date) {
@@ -74,13 +89,17 @@ class InputFields extends StatelessWidget {
                       addTransaction();
                     },
                     child: Text("Add")),
+                SizedBox(
+                  width: 80,
+                  height: 10,
+                ),
                 ElevatedButton(
                     // onPressed: (String id, String title, double amount, String currancy, DateTime date) {
                     //   Transactoin tx = Transactoin(id: id, title: title, amount: amount, currancy: currancy, date: date)
                     //   transactions.add(tx);
                     // },
                     onPressed: () {
-                      clearTransaction();
+                      clearAllEntries();
                     },
                     child: Text("Clear")),
               ],

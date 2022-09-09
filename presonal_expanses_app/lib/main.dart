@@ -43,13 +43,12 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   String titleInput = "";
   double priceInput = 0.0;
-  String currancyInput = "";
-  DateTime DateInput = DateTime.now();
+  String currancyInput = "\$";
+  DateTime DateInput = DateTime(2022);
 
   //we use these in order to use the listners
   final titleController = TextEditingController();
   final amountController = TextEditingController();
-  final dateController = TextEditingController();
   final currancyController = TextEditingController();
 
   /// manual functions to be able to change the value of the parameters through
@@ -61,8 +60,6 @@ class _MainPageState extends State<MainPage> {
   void ChangePrice(String price) => priceInput = double.parse(price);
 
   void ChangeCurrancy(String curr) => currancyInput = curr;
-
-  void ChangeDate(String date) => DateInput = DateTime.now();
 
   void printAllData() => print(
       "title = $titleInput\nprice = ${currancyInput + priceInput.toString()}\nDate = ${DateFormat.yMMMd().format(DateInput)}");
@@ -130,17 +127,53 @@ class _MainPageState extends State<MainPage> {
     });
   }
 
+  void _presentDatePicker() {
+    showDatePicker(
+            context: context,
+            initialDate: DateTime.now(),
+            firstDate: DateTime(2022),
+            lastDate: DateTime.now())
+        .then((pickedDate) {
+      if (pickedDate == null) return;
+      setState(() {
+        DateInput = pickedDate;
+      });
+      print("titleController.text is ${titleController.text}");
+      Navigator.of(context).pop();
+      print(titleController.text);
+      ShowTheInputArea(context);
+    });
+  }
+
+  void clearAllEntries() {
+    Navigator.of(context).pop();
+
+    setState(() {
+      amountController.text = "";
+      titleController.text = "";
+      DateInput = DateTime(2022);
+    });
+    ShowTheInputArea(context);
+  }
+
   void addTransaction() {
+    /// input validation
+    if (DateInput == DateTime(2022) ||
+        amountController.text.isEmpty ||
+        titleController.text.isEmpty) return;
+
     Transaction trans = Transaction(
         id: "T${transactions.length + 1}",
         amount: double.parse(amountController.text),
-        currancy: currancyInput,
+        currancy: "\$",
         date: DateInput,
-        title: titleInput);
-
+        title: titleController.text);
     setState(() {
       transactions.add(trans);
     });
+
+    /// to clear the value inside it after adding it
+    clearAllEntries();
 
     /// this is how we can close the showmodalbottomsheet
     /// after submiting certain object
@@ -165,11 +198,14 @@ class _MainPageState extends State<MainPage> {
           return GestureDetector(
             /// still need to know more about this widget /// still need to know more about this widget
             child: InputFields(
+                selectedDate: DateInput,
+                titleController: titleController,
+                amountController: amountController,
+                datePicker: _presentDatePicker,
                 clearTransaction: clearTransactions,
+                clearAllEntries: clearAllEntries,
                 ChangeTitle: ChangeTitle,
                 ChangeCurrancy: ChangeCurrancy,
-                ChangeDate: ChangeDate,
-                amountController: amountController,
                 ChangePrice: ChangePrice,
                 addTransaction: addTransaction),
           );

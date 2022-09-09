@@ -22,7 +22,7 @@ class ChartBar extends StatelessWidget {
           height: 20,
           child: FittedBox(
             child: Text(
-              "\$ ${spendingAmount.toStringAsFixed(0)}",
+              "\$${spendingAmount.toStringAsFixed(0)}",
               style: TextStyle(
                   fontFamily: 'DancingScript',
                   fontSize: 15,

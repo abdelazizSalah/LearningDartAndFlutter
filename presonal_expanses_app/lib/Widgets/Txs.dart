@@ -11,7 +11,7 @@ class Txs extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       // color: Colors.amber,
-      height: 440,
+      height: 500,
       // color: Colors.amber,
       child: transactions.isEmpty
           ? Column(
