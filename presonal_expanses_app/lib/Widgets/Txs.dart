@@ -4,8 +4,8 @@ import '../Models/Transaction.dart';
 
 class Txs extends StatelessWidget {
   final List<Transaction> transactions;
-
-  Txs({required this.transactions});
+  final removeTransaction;
+  Txs({required this.transactions, this.removeTransaction});
 
   @override
   Widget build(BuildContext context) {
@@ -36,89 +36,156 @@ class Txs extends StatelessWidget {
               itemCount: transactions.length,
               itemBuilder: (context, index) {
                 return Card(
-                    child: Container(
-                  height: 75,
-                  child: Card(
-                    elevation: 20,
-                    shadowColor: Colors.blueAccent,
-                    // color: Color.fromARGB(135, 167, 6, 6),
-                    color: Theme.of(context).primaryColorDark,
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Container(
-                            padding: EdgeInsets.symmetric(
-                                vertical: 5, horizontal: 3),
-                            decoration: BoxDecoration(
-                                border: Border.all(
-                                    style: BorderStyle.solid,
+                  elevation: 8,
+                  color: Theme.of(context).primaryColorLight,
+                  margin: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+                  child: ListTile(
+                    leading: Container(
+                      /// the height and the width should be double of the
+                      /// circle radius
+                      height: 70,
+                      width: 70,
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Theme.of(context).primaryColorDark),
+                      child: FittedBox(
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Text(
+                            "${transactions[index].currancy} ${transactions[index].amount}",
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: Theme.of(context).accentColor,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    title: Text(
+                      transactions[index].title,
+                      style: TextStyle(
+                          fontSize: 17.4,
+                          fontWeight: FontWeight.bold,
+                          shadows: [
+                            Shadow(
+                                blurRadius: 90,
+                                offset: Offset(10, 10),
+                                color: Colors.black87)
+                          ]),
+                    ),
+                    subtitle: Text(
+                        DateFormat.yMMMd().format(transactions[index].date)),
+                    trailing: IconButton(
+                        // color: Color.fromARGB(255, 223, 105, 105),
+                        color: Color.fromARGB(255, 207, 160, 18),
+                        icon: Icon(Icons.delete),
 
-                                    /// This is how we can access the color of the main
-                                    /// theme we have, and we can access diffrent
-                                    /// sahdes of it
-                                    // color: Theme.of(context).accentColor
-                                    color: Colors.white,
-                                    width: 1.2)),
-                            child: Row(children: [
-                              Text(
-                                transactions[index].currancy +
-                                    "${transactions[index].amount}",
-                                style: TextStyle(
-                                    // decoration: TextDecoration.lineThrough,
-                                    color: Theme.of(context).accentColor,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 22.5,
-                                    shadows: [
-                                      Shadow(
-                                          blurRadius: 100, color: Colors.black)
-                                    ]),
-                              )
-                            ]),
-                          ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                child: Text(
-                                  transactions[index].title,
-                                  // textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      // backgroundColor: Colors.white,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 20,
-                                      shadows: [
-                                        Shadow(
-                                            blurRadius: 40, color: Colors.white)
-                                      ]),
-                                ),
-                              ),
-                              Container(
-                                child: Text(
-                                  // textAlign: TextAlign.center,
-                                  //this is the normal way or the manual one
-                                  // "${transactions[index].date.day.toString() + "/" + transactions[index].date.month.toString() + "/" + transactions[index].date.year.toString()} ",
-                                  //while this is the automatic version using the intl package :)
-                                  // there is a difference between small letters and capitals
-                                  // see the documentations at https://pub.dev/documentation/intl/latest/
-                                  // DateFormat('dd/MM/yyyy')
-                                  //     .format(transactions[index].date),
-                                  DateFormat.yMMMd()
-                                      .format(transactions[index].date),
-                                  style: TextStyle(
-                                      decoration: TextDecoration.underline,
-                                      color: Colors.white,
-                                      // fontWeight: FontWeight.bold,
-                                      fontSize: 15),
-                                ),
-                              )
-                            ],
-                          ),
-                        ]),
+                        /// we should remove this item
+                        onPressed: () => removeTransaction(index)),
                   ),
-                ));
+                );
               },
             ),
     );
   }
 }
+
+/// Circular Avatar
+///  CircleAvatar(
+//   foregroundColor: Theme.of(context).accentColor,
+//   radius: 30,
+//   child: FittedBox(
+//     child: Padding(
+//       padding: const EdgeInsets.all(6.0),
+//       child: Text(
+//         "${transactions[index].currancy} ${transactions[index].amount}",
+//         style: TextStyle(fontSize: 20),
+//       ),
+//     ),
+//   ),
+// ),
+
+/// the card view
+///  Card(
+//       child: Container(
+//     height: 75,
+//     child: Card(
+//       elevation: 20,
+//       shadowColor: Colors.blueAccent,
+//       // color: Color.fromARGB(135, 167, 6, 6),
+//       color: Theme.of(context).primaryColorDark,
+//       child: Row(
+//           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//           children: [
+//             Container(
+//               padding: EdgeInsets.symmetric(
+//                   vertical: 5, horizontal: 3),
+//               decoration: BoxDecoration(
+//                   border: Border.all(
+//                       style: BorderStyle.solid,
+
+//                       /// This is how we can access the color of the main
+//                       /// theme we have, and we can access diffrent
+//                       /// sahdes of it
+//                       // color: Theme.of(context).accentColor
+//                       color: Colors.white,
+//                       width: 1.2)),
+//               child: Row(children: [
+//                 Text(
+//                   transactions[index].currancy +
+//                       "${transactions[index].amount}",
+//                   style: TextStyle(
+//                       // decoration: TextDecoration.lineThrough,
+//                       color: Theme.of(context).accentColor,
+//                       fontWeight: FontWeight.bold,
+//                       fontSize: 22.5,
+//                       shadows: [
+//                         Shadow(
+//                             blurRadius: 100, color: Colors.black)
+//                       ]),
+//                 )
+//               ]),
+//             ),
+//             Column(
+//               mainAxisAlignment: MainAxisAlignment.center,
+//               children: [
+//                 Container(
+//                   child: Text(
+//                     transactions[index].title,
+//                     // textAlign: TextAlign.center,
+//                     style: TextStyle(
+//                         // backgroundColor: Colors.white,
+//                         color: Colors.white,
+//                         fontWeight: FontWeight.w500,
+//                         fontSize: 20,
+//                         shadows: [
+//                           Shadow(
+//                               blurRadius: 40, color: Colors.white)
+//                         ]),
+//                   ),
+//                 ),
+//                 Container(
+//                   child: Text(
+//                     // textAlign: TextAlign.center,
+//                     //this is the normal way or the manual one
+//                     // "${transactions[index].date.day.toString() + "/" + transactions[index].date.month.toString() + "/" + transactions[index].date.year.toString()} ",
+//                     //while this is the automatic version using the intl package :)
+//                     // there is a difference between small letters and capitals
+//                     // see the documentations at https://pub.dev/documentation/intl/latest/
+//                     // DateFormat('dd/MM/yyyy')
+//                     //     .format(transactions[index].date),
+//                     DateFormat.yMMMd()
+//                         .format(transactions[index].date),
+//                     style: TextStyle(
+//                         decoration: TextDecoration.underline,
+//                         color: Colors.white,
+//                         // fontWeight: FontWeight.bold,
+//                         fontSize: 15),
+//                   ),
+//                 )
+//               ],
+//             ),
+//           ]),
+//     ),
+//   )
+// )

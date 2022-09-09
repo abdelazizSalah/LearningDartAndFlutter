@@ -18,13 +18,16 @@ class ChartBar extends StatelessWidget {
       children: [
         /// fitted box widget force the child into the available space
         /// so if the space is not enough it decrements its size
-        FittedBox(
-          child: Text(
-            "\$ ${spendingAmount.toStringAsFixed(0)}",
-            style: TextStyle(
-                fontFamily: 'DancingScript',
-                fontSize: 15,
-                fontWeight: FontWeight.bold),
+        Container(
+          height: 20,
+          child: FittedBox(
+            child: Text(
+              "\$ ${spendingAmount.toStringAsFixed(0)}",
+              style: TextStyle(
+                  fontFamily: 'DancingScript',
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold),
+            ),
           ),
         ),
         SizedBox(

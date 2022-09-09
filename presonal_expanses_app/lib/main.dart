@@ -124,6 +124,12 @@ class _MainPageState extends State<MainPage> {
         date: DateTime.now()),
   ];
 
+  void removeTransaction(int index) {
+    setState(() {
+      transactions.remove(transactions[index]);
+    });
+  }
+
   void addTransaction() {
     Transaction trans = Transaction(
         id: "T${transactions.length + 1}",
@@ -224,7 +230,10 @@ class _MainPageState extends State<MainPage> {
                * will cause an overflow 
                */
 
-                Txs(transactions: transactions)
+                Txs(
+                  transactions: transactions,
+                  removeTransaction: removeTransaction,
+                )
               ],
             );
           },

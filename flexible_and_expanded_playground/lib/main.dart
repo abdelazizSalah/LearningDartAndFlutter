@@ -48,7 +48,7 @@ class ExpandedClass extends StatelessWidget {
             ),
           ),
           Expanded(
-            /// simply flexible with tight as fit
+            /// simply flexible with tight as fitb
             flex: 3,
             child: Container(
               height: 100,

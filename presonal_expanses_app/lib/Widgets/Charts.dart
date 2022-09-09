@@ -25,7 +25,10 @@ class Charts extends StatelessWidget {
         'Day': DateFormat.E().format(weekDay).substring(0, 2),
         'Amount': totalSum
       };
-    });
+
+      /// we used reverse to make the oldest day on the left
+      /// and the recent day on the right
+    }).reversed.toList();
   }
 
   double get maxSpending {
@@ -50,10 +53,11 @@ class Charts extends StatelessWidget {
             height: 0,
           )
         : Container(
-            height: 150,
+            height: 153,
             width: 400,
             // padding: EdgeInsets.all(),
             child: Card(
+              elevation: 5,
               child: Card(
                   margin: EdgeInsets.all(5),
                   elevation: 10,
