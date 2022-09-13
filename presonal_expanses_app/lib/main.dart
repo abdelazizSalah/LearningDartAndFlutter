@@ -280,9 +280,6 @@ class _MainPageState extends State<MainPage> {
           FloatingActionButtonLocation.miniCenterFloat,
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        // hoverColor: Colors.amber[900],
-        // focusColor: Colors.amber[900],
-        // backgroundColor: Color.fromARGB(255, 255, 102, 0),
         onPressed: () {
           ShowTheInputArea(context);
         },
