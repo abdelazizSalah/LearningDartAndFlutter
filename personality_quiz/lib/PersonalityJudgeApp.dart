@@ -123,7 +123,10 @@ class HomePage extends State<QuizClass> {
         // drawer: Drawer(),
         //this is how we can display widgets conditionally :)
         body: _questionsCntr < _questionList.length
-            ? Quiz(_questionList, _questionsCntr, TheQuestionSolutions)
+            ? Quiz(
+                questions: _questionList,
+                questionsCntr: _questionsCntr,
+                TheQuestionSolutions: TheQuestionSolutions)
             // ignore: prefer_const_constructors
             : Result(_totalScore, _resetQuiz));
   }

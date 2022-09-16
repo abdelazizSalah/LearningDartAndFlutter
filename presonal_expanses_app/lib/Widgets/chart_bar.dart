@@ -19,7 +19,7 @@ class ChartBar extends StatelessWidget {
         /// fitted box widget force the child into the available space
         /// so if the space is not enough it decrements its size
         Container(
-          height: 20,
+          height: MediaQuery.of(context).size.height * 0.05,
           child: FittedBox(
             child: Text(
               "\$${spendingAmount.toStringAsFixed(0)}",
@@ -34,7 +34,7 @@ class ChartBar extends StatelessWidget {
           height: 4,
         ),
         Container(
-          height: 80,
+          height: MediaQuery.of(context).size.height * 0.21,
           width: 15,
           child: Stack(
             children: [
@@ -60,12 +60,15 @@ class ChartBar extends StatelessWidget {
         SizedBox(
           height: 4,
         ),
-        Text(
-          '$label',
-          style: TextStyle(
-              fontFamily: 'DancingScript',
-              fontSize: 15,
-              fontWeight: FontWeight.bold),
+        Container(
+          height: MediaQuery.of(context).size.height * 0.15,
+          child: Text(
+            '$label',
+            style: TextStyle(
+                fontFamily: 'DancingScript',
+                fontSize: 15,
+                fontWeight: FontWeight.bold),
+          ),
         )
       ],
     );

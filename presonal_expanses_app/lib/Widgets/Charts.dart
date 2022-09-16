@@ -53,8 +53,8 @@ class Charts extends StatelessWidget {
             height: 0,
           )
         : Container(
-            height: 153,
-            width: 400,
+            height: MediaQuery.of(context).size.height * 0.5,
+            width: MediaQuery.of(context).size.width,
             // padding: EdgeInsets.all(),
             child: Card(
               elevation: 5,
@@ -65,7 +65,7 @@ class Charts extends StatelessWidget {
                     Container(
                       padding: EdgeInsets.all(4),
                       color: Colors.blueGrey[200],
-                      width: 370,
+                      width: MediaQuery.of(context).size.width - 18,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: groupedTransactionValues.map((data) {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:presonal_expanses_app/Widgets/InputFields.dart';
 import 'package:intl/intl.dart';
 import './Widgets/Charts.dart';
@@ -6,6 +7,10 @@ import './Widgets/Txs.dart';
 import './Models/Transaction.dart';
 
 void main() {
+  // /// This is how we can prevent the landScape mode
+  // WidgetsFlutterBinding.ensureInitialized();
+  // SystemChrome.setPreferredOrientations(
+  //     [DeviceOrientation.portraitDown, DeviceOrientation.portraitUp]);
   runApp(PersonalExpanses());
 }
 
@@ -26,6 +31,8 @@ class PersonalExpanses extends StatelessWidget {
             primarySwatch: Colors.indigo,
             accentColor: Colors.amber,
             fontFamily: 'OpenSans',
+            textTheme: TextTheme(
+                bodyText1: TextStyle(color: Colors.indigo, fontSize: 18)),
             appBarTheme: AppBarTheme(
                 titleTextStyle: TextStyle(
               fontFamily: 'DancingScript',
@@ -218,6 +225,7 @@ class _MainPageState extends State<MainPage> {
     }).toList();
   }
 
+  bool _ShowTxs = false;
   //main build function
   @override
   Widget build(BuildContext context) {
@@ -245,10 +253,8 @@ class _MainPageState extends State<MainPage> {
         color: Color.fromARGB(255, 222, 230, 233),
 
         // height: double.infinity,
-        height: double.infinity,
-        width: double.infinity,
-        // color: Color.fromARGB(255, 13, 127, 172),
-        // color: Theme.of(context).primaryColorLight,
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
 
         /// I made it here to be able to scroll the whole page
         // child: SingleChildScrollView(
@@ -257,8 +263,23 @@ class _MainPageState extends State<MainPage> {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Charts(_recentTxs),
-                /**
+                Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                  Text(
+                    "Show Txs",
+                    style: Theme.of(context).textTheme.bodyText1,
+                  ),
+                  Switch(
+                      value: _ShowTxs,
+                      onChanged: (val) {
+                        setState(() {
+                          _ShowTxs = val;
+                        });
+                      })
+                ]),
+                _ShowTxs == true
+                    ? Charts(_recentTxs)
+
+                    /**
                * 34an t5ly subwidget hya el scrollable lazm t3ml specific height 
                * and width, w da 34an t2ol le el Scrollable function wlahy lw el 
                * height zad 3n kaza w el width zad 3n kaza khlas ebd2 scroll. 
@@ -266,10 +287,10 @@ class _MainPageState extends State<MainPage> {
                * will cause an overflow 
                */
 
-                Txs(
-                  transactions: transactions,
-                  removeTransaction: removeTransaction,
-                )
+                    : Txs(
+                        transactions: transactions,
+                        removeTransaction: removeTransaction,
+                      )
               ],
             );
           },
