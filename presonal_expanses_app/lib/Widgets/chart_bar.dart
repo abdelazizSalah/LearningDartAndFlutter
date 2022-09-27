@@ -13,13 +13,15 @@ class ChartBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var mediaQuery = MediaQuery.of(context);
+    var portrait = mediaQuery.orientation == Orientation.portrait;
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         /// fitted box widget force the child into the available space
         /// so if the space is not enough it decrements its size
         Container(
-          height: MediaQuery.of(context).size.height * 0.05,
+          height: mediaQuery.size.height * (!portrait ? 0.055 : 0.03),
           child: FittedBox(
             child: Text(
               "\$${spendingAmount.toStringAsFixed(0)}",
@@ -31,10 +33,10 @@ class ChartBar extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: 4,
+          height: mediaQuery.size.height * (!portrait ? 0.005 : 0.005),
         ),
         Container(
-          height: MediaQuery.of(context).size.height * 0.21,
+          height: mediaQuery.size.height * (!portrait ? 0.3 : 0.13),
           width: 15,
           child: Stack(
             children: [
@@ -58,15 +60,15 @@ class ChartBar extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: 4,
+          height: mediaQuery.size.height * (!portrait ? 0.001 : 0.005),
         ),
         Container(
-          height: MediaQuery.of(context).size.height * 0.15,
+          height: mediaQuery.size.height * (!portrait ? 0.05 : 0.025),
           child: Text(
             '$label',
             style: TextStyle(
                 fontFamily: 'DancingScript',
-                fontSize: 15,
+                fontSize: 20,
                 fontWeight: FontWeight.bold),
           ),
         )

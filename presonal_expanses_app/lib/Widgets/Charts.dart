@@ -48,13 +48,15 @@ class Charts extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var mediaQuery = MediaQuery.of(context);
+    var portrait = mediaQuery.orientation == Orientation.portrait;
     return recentTransactions.isEmpty
         ? Container(
             height: 0,
           )
         : Container(
-            height: MediaQuery.of(context).size.height * 0.5,
-            width: MediaQuery.of(context).size.width,
+            height: mediaQuery.size.height * (!portrait ? 0.5 : 0.25),
+            width: mediaQuery.size.width,
             // padding: EdgeInsets.all(),
             child: Card(
               elevation: 5,
@@ -65,7 +67,7 @@ class Charts extends StatelessWidget {
                     Container(
                       padding: EdgeInsets.all(4),
                       color: Colors.blueGrey[200],
-                      width: MediaQuery.of(context).size.width - 18,
+                      width: mediaQuery.size.width - 18,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: groupedTransactionValues.map((data) {

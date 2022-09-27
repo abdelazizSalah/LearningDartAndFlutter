@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'TxsCard.dart';
 import '../Models/Transaction.dart';
 
 class Txs extends StatelessWidget {
@@ -9,25 +9,24 @@ class Txs extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var mediaQuery = MediaQuery.of(context);
+    var portrait = mediaQuery.orientation == Orientation.portrait;
     return Container(
-      // color: Colors.amber,
-      height: 500,
-      // color: Colors.amber,
+      height: mediaQuery.size.height * (portrait ? 0.6 : 0.7),
       child: transactions.isEmpty
           ? Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text(
                   "No Transactions Added yet :(",
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
-                // SizedBox(
-                //   // we can use it a separator
-                //   height: 20,
-                // ),
+                SizedBox(
+                  // we can use it a separator
+                  height: mediaQuery.size.height * 0.05,
+                ),
                 Container(
-                    height: 360,
-                    width: 400,
+                    height: mediaQuery.size.height * 0.6,
                     child: Image.asset('assets/imgs/image/waiting.png',
                         fit: BoxFit.contain))
               ],
@@ -35,55 +34,10 @@ class Txs extends StatelessWidget {
           : ListView.builder(
               itemCount: transactions.length,
               itemBuilder: (context, index) {
-                return Card(
-                  elevation: 8,
-                  color: Theme.of(context).primaryColorLight,
-                  margin: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
-                  child: ListTile(
-                    leading: Container(
-                      /// the height and the width should be double of the
-                      /// circle radius
-                      height: 70,
-                      width: 70,
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Theme.of(context).primaryColorDark),
-                      child: FittedBox(
-                        child: Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Text(
-                            "${transactions[index].currancy} ${transactions[index].amount}",
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Theme.of(context).accentColor,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    title: Text(
-                      transactions[index].title,
-                      style: TextStyle(
-                          fontSize: 17.4,
-                          fontWeight: FontWeight.bold,
-                          shadows: [
-                            Shadow(
-                                blurRadius: 90,
-                                offset: Offset(10, 10),
-                                color: Colors.black87)
-                          ]),
-                    ),
-                    subtitle: Text(
-                        DateFormat.yMMMd().format(transactions[index].date)),
-                    trailing: IconButton(
-                        // color: Color.fromARGB(255, 223, 105, 105),
-                        color: Color.fromARGB(255, 207, 160, 18),
-                        icon: Icon(Icons.delete),
-
-                        /// we should remove this item
-                        onPressed: () => removeTransaction(index)),
-                  ),
-                );
+                return TxsCard(
+                    index: index,
+                    transaction: transactions[index],
+                    removeTransaction: removeTransaction);
               },
             ),
     );

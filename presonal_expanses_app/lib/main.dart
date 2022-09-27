@@ -227,8 +227,54 @@ class _MainPageState extends State<MainPage> {
 
   bool _ShowTxs = false;
   //main build function
+
+  List<Widget> _builderPortrait() {
+    return [
+      Charts(_recentTxs),
+      Txs(
+        transactions: transactions,
+        removeTransaction: removeTransaction,
+      )
+    ];
+  }
+
+  List<Widget> _builderLandScape() {
+    return [
+      Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+        Text(
+          "Show Txs",
+          style: Theme.of(context).textTheme.bodyText1,
+        ),
+        Switch(
+            value: _ShowTxs,
+            onChanged: (val) {
+              setState(() {
+                _ShowTxs = val;
+              });
+            })
+      ]),
+      _ShowTxs == true
+          ? Charts(_recentTxs)
+
+          /**
+               * 34an t5ly subwidget hya el scrollable lazm t3ml specific height 
+               * and width, w da 34an t2ol le el Scrollable function wlahy lw el 
+               * height zad 3n kaza w el width zad 3n kaza khlas ebd2 scroll. 
+               * but here we can get the problem of poping up the keyboard it 
+               * will cause an overflow 
+               */
+
+          : Txs(
+              transactions: transactions,
+              removeTransaction: removeTransaction,
+            )
+    ];
+  }
+
   @override
   Widget build(BuildContext context) {
+    var mediaQuery = MediaQuery.of(context);
+    var portrait = mediaQuery.orientation == Orientation.portrait;
     return Scaffold(
       appBar: AppBar(
         /// in order to set the floating button in the appbar we add the action
@@ -252,45 +298,19 @@ class _MainPageState extends State<MainPage> {
       body: Container(
         color: Color.fromARGB(255, 222, 230, 233),
 
-        // height: double.infinity,
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
 
         /// I made it here to be able to scroll the whole page
         // child: SingleChildScrollView(
+
         child: ListView.builder(
           itemBuilder: (ctx, index) {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  Text(
-                    "Show Txs",
-                    style: Theme.of(context).textTheme.bodyText1,
-                  ),
-                  Switch(
-                      value: _ShowTxs,
-                      onChanged: (val) {
-                        setState(() {
-                          _ShowTxs = val;
-                        });
-                      })
-                ]),
-                _ShowTxs == true
-                    ? Charts(_recentTxs)
-
-                    /**
-               * 34an t5ly subwidget hya el scrollable lazm t3ml specific height 
-               * and width, w da 34an t2ol le el Scrollable function wlahy lw el 
-               * height zad 3n kaza w el width zad 3n kaza khlas ebd2 scroll. 
-               * but here we can get the problem of poping up the keyboard it 
-               * will cause an overflow 
-               */
-
-                    : Txs(
-                        transactions: transactions,
-                        removeTransaction: removeTransaction,
-                      )
+                if (!portrait) ..._builderLandScape(),
+                if (portrait) ..._builderPortrait(),
               ],
             );
           },
