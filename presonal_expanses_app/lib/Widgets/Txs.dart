@@ -12,7 +12,7 @@ class Txs extends StatelessWidget {
     var mediaQuery = MediaQuery.of(context);
     var portrait = mediaQuery.orientation == Orientation.portrait;
     return Container(
-      height: mediaQuery.size.height * (portrait ? 0.6 : 0.7),
+      height: mediaQuery.size.height,
       child: transactions.isEmpty
           ? Column(
               mainAxisAlignment: MainAxisAlignment.start,

@@ -6,8 +6,15 @@ import './Charts.dart';
 import './Txs.dart';
 
 class NewTransaction extends StatefulWidget {
+  NewTransaction() {
+    print("Constructor of the NewTransactions Widget!");
+  }
+
   @override
-  State<NewTransaction> createState() => _NewTransactionState();
+  State<NewTransaction> createState() {
+    print('CreateState of NewTransaction');
+    return _NewTransactionState();
+  }
 }
 
 class _NewTransactionState extends State<NewTransaction> {
@@ -15,6 +22,49 @@ class _NewTransactionState extends State<NewTransaction> {
   double priceInput = 0.0;
   String currancyInput = "\$";
   DateTime DateInput = DateTime(2022);
+
+  _NewTransactionState() {
+    print("_NewTransactionState constructor in the State");
+  }
+
+  @override
+
+  /// we usually do here our initializations which are:
+  /// 1- Used to make HTTP requests.
+  /// 2- loading some data from the server.
+  /// 3- loding some data from the data base.
+  void initState() {
+    /// initState should be called first before any logic in the method,
+    /// according to the documentations
+    /// but the logic in the initState will not matter and will not
+    /// affect any thing but it is a good practice.
+    /// and this is a general good practice is that you should call super. first.
+
+    /// the parent class is State Class
+    super.initState();
+
+    print('initState method');
+  }
+
+  /*
+  this is a method which is called whenever the build function is recalled 
+  or whenever the widget is updated or rerendered .
+
+  @author Abdelaziz Salah 
+  */
+  @override
+  void didUpdateWidget(covariant NewTransaction oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    print("DidUpdateWidget method");
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+
+    print('Dispose');
+  }
 
   //we use these in order to use the listners
   final titleController = TextEditingController();

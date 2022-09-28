@@ -36,7 +36,6 @@ class Charts extends StatelessWidget {
     for (var amnt in groupedTransactionValues) {
       spending += amnt['Amount'] as double;
     }
-    print("MaxSpending = $spending");
     return spending;
   }
 
