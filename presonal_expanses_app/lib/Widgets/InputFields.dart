@@ -28,10 +28,12 @@ class InputFields extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 10,
+      elevation: 200,
+      shadowColor: Colors.indigo,
       child: Container(
         margin: EdgeInsets.only(left: 10),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             TextField(
               decoration: InputDecoration(labelText: "price"),
