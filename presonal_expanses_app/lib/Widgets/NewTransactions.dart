@@ -17,7 +17,35 @@ class NewTransaction extends StatefulWidget {
   }
 }
 
-class _NewTransactionState extends State<NewTransaction> {
+class _NewTransactionState extends State<NewTransaction>
+    with WidgetsBindingObserver {
+  // /// this is a method called once when the
+  // /// class is created for the first time only
+  // @override
+  // void initState() {
+  //   super.initState();
+
+  //   /// here we are telling flutter
+  //   /// hey whenever my app lifecycle changes I want you to go to the observer
+  //   /// and call the method which is called didChangeAppLifecycleState
+  //   WidgetsBinding.instance.addObserver(this);
+  // }
+
+  /// this method is called whenever the appLife cycle changes
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    print(state);
+  }
+
+  /// this method is called when the program is going to be closed
+  // @override
+  // void dispose() {
+  //   super.dispose();
+
+  //   /// here we are removing the observer to avoid memory leakage
+  //   WidgetsBinding.instance.removeObserver(this);
+  // }
+
   String titleInput = "";
   double priceInput = 0.0;
   String currancyInput = "\$";
@@ -42,6 +70,7 @@ class _NewTransactionState extends State<NewTransaction> {
 
     /// the parent class is State Class
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
 
     print('initState method');
   }
@@ -63,6 +92,7 @@ class _NewTransactionState extends State<NewTransaction> {
   void dispose() {
     super.dispose();
 
+    WidgetsBinding.instance.removeObserver(this);
     print('Dispose');
   }
 
