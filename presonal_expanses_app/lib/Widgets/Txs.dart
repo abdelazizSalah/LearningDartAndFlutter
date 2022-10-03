@@ -9,38 +9,45 @@ class Txs extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    int cntr = 0;
     var mediaQuery = MediaQuery.of(context);
     var portrait = mediaQuery.orientation == Orientation.portrait;
     return Container(
-      height: mediaQuery.size.height,
-      child: transactions.isEmpty
-          ? Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Text(
-                  "No Transactions Added yet :(",
-                  style: Theme.of(context).textTheme.titleLarge,
-                ),
-                SizedBox(
-                  // we can use it a separator
-                  height: mediaQuery.size.height * 0.05,
-                ),
-                Container(
-                    height: mediaQuery.size.height * 0.6,
-                    child: Image.asset('assets/imgs/image/waiting.png',
-                        fit: BoxFit.contain))
-              ],
-            )
-          : ListView.builder(
-              itemCount: transactions.length,
-              itemBuilder: (context, index) {
-                return TxsCard(
-                    index: index,
-                    transaction: transactions[index],
+        height: mediaQuery.size.height,
+        child: transactions.isEmpty
+            ? Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    "No Transactions Added yet :(",
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
+                  SizedBox(
+                    // we can use it a separator
+                    height: mediaQuery.size.height * 0.05,
+                  ),
+                  Container(
+                      height: mediaQuery.size.height * 0.6,
+                      child: Image.asset('assets/imgs/image/waiting.png',
+                          fit: BoxFit.contain))
+                ],
+              )
+            // : ListView.builder(
+            //     itemCount: transactions.length,
+            //     itemBuilder: (context, index) {
+            //       return TxsCard(
+            //           index: index,
+            //           transaction: transactions[index],
+            //           removeTransaction: removeTransaction);
+            //     },
+            //   ),
+            : ListView(
+                children: transactions.map((tx) {
+                return TxsCard(ValueKey(tx.id),
+                    index: cntr++,
+                    transaction: tx,
                     removeTransaction: removeTransaction);
-              },
-            ),
-    );
+              }).toList()));
   }
 }
 

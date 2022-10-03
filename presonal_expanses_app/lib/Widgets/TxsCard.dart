@@ -1,14 +1,38 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class TxsCard extends StatelessWidget {
+class TxsCard extends StatefulWidget {
   final index;
   final transaction;
   final removeTransaction;
-  const TxsCard(
+  const TxsCard(Key key,
       {required this.index,
       required this.transaction,
-      required this.removeTransaction});
+      required this.removeTransaction})
+      : super(key: key);
+
+  @override
+  State<TxsCard> createState() => _TxsCardState();
+}
+
+class _TxsCardState extends State<TxsCard> {
+  Color _bgColor = Colors.green;
+
+  @override
+  void initState() {
+    super.initState();
+
+    const avalibleColors = [
+      Colors.red,
+      Colors.green,
+      Colors.black,
+      Colors.purple,
+    ];
+
+    _bgColor = avalibleColors[Random().nextInt(4)];
+  }
 
   Widget _buildPortrait() {
     return IconButton(
@@ -16,7 +40,7 @@ class TxsCard extends StatelessWidget {
         icon: Icon(Icons.delete),
 
         /// we should remove this item
-        onPressed: () => removeTransaction(index));
+        onPressed: () => widget.removeTransaction(widget.index));
   }
 
   @override
@@ -49,13 +73,14 @@ class TxsCard extends StatelessWidget {
               Container(
             margin: EdgeInsets.only(left: !portrait ? 50 : 0),
             child: CircleAvatar(
+              backgroundColor: _bgColor,
               foregroundColor: Theme.of(context).accentColor,
               radius: 30,
               child: FittedBox(
                 child: Padding(
                   padding: const EdgeInsets.all(6.0),
                   child: Text(
-                    "${transaction.currancy} ${transaction.amount}",
+                    "${widget.transaction.currancy} ${widget.transaction.amount}",
                     style: TextStyle(fontSize: 20),
                   ),
                 ),
@@ -63,7 +88,7 @@ class TxsCard extends StatelessWidget {
             ),
           ),
           title: Text(
-            transaction.title,
+            widget.transaction.title,
             style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
@@ -75,7 +100,7 @@ class TxsCard extends StatelessWidget {
                 ]),
           ),
           subtitle: Text(
-            DateFormat.yMMMd().format(transaction.date),
+            DateFormat.yMMMd().format(widget.transaction.date),
             style: TextStyle(fontSize: 14),
           ),
           trailing: portrait ? _buildPortrait() : _buildLandScape()),
