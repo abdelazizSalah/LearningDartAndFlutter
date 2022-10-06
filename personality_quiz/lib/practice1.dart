@@ -14,30 +14,25 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext cont) {
     return Scaffold(
-      appBar: AppBar(
-          title: Text(
-        "My First Project",
+        appBar: AppBar(
+            title: Text("My First Project",
+                style: TextStyle(
+                  color: Colors.white,
+                  shadows: [Shadow(color: Colors.white, blurRadius: 10)],
+                  fontSize: 30,
+                ))),
+        drawer: Drawer(),
+        body: Container(
+          child: Text(
+            "Hello Bro!",
             style: TextStyle(
-                color: Colors.white ,
-                shadows: [Shadow(color: Colors.white, blurRadius: 10)],
-                fontSize: 30,
-            )
-
-      )),
-      drawer: Drawer(),
-      body: Container(
-        child: Text(
-          "Hello Bro!",
-          style: TextStyle(
-            backgroundColor: Colors.purple,
-            color: Colors.pink,
-            fontSize: 30,
-            fontWeight: FontWeight.bold,
+              backgroundColor: Colors.purple,
+              color: Colors.pink,
+              fontSize: 30,
+              fontWeight: FontWeight.bold,
+            ),
           ),
-        ),
-        margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-      )
-
-    );
+          margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+        ));
   }
 }

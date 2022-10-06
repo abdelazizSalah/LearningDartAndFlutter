@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-void main () {
+void main() {
   runApp(myApp());
 }
 
@@ -10,10 +10,11 @@ class myApp extends StatelessWidget {
   @override
   /* This method is responsible for building the UI */
   Widget build(BuildContext context) {
-      return MaterialApp( // the material app is the root widget which must be found
-        // in the class on which we run the function runApp ()
-        home : WelcomePage(),
-      );
+    return MaterialApp(
+      // the material app is the root widget which must be found
+      // in the class on which we run the function runApp ()
+      home: WelcomePage(),
+    );
   }
 }
 
@@ -23,18 +24,18 @@ class myApp extends StatelessWidget {
 // 2- StatefullWidget -> has interactions
 class WelcomePage extends StatelessWidget {
   @override
-  Widget build (BuildContext context) {
-      return Scaffold(
-        appBar: AppBar(),
-        drawer: Drawer(),
-        body: Text("Hello Zizo!"),
-      );
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+      drawer: Drawer(),
+      body: Text("Hello Zizo!"),
+    );
   }
 }
 
-class Login  extends StatelessWidget {
+class Login extends StatelessWidget {
   @override
-  Widget build (BuildContext context) {
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
       drawer: Drawer(),

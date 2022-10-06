@@ -132,8 +132,6 @@ class BackGroundAssetImage extends StatelessWidget {
   }
 }
 
-
-
 /*
   el container howa 3bara 3n 3elba bt7ot gowaha kol el data el enta 33auzha b7es t2sm el shasha bt3tk le kaza goz2
   momyztha tb3n enk te2dr tedy kol container el alwan bt3to w tedelo properties 5asa beh hwa bs
@@ -220,11 +218,7 @@ class BackGroundAssetImage extends StatelessWidget {
 
  */
 
-
 /*
   PubSpec.yaml ->
   da file wazefto eno y7ot el packages el ana bst5dmha gowa el project folders
  */
-
-
-

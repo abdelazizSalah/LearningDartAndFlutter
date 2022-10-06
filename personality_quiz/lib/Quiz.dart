@@ -51,15 +51,14 @@ class Quiz extends StatelessWidget {
   }
 }
 
-
-          /**
+/**
            * HardCoding our answer
            */
-          // Answer(
-          //     questions[questionsCntr]["Answers"][0], TheQuestionSolutions),
-          // Answer(
-          //     questions[questionsCntr]["Answers"][1], TheQuestionSolutions),
-          // Answer(
-          //     questions[questionsCntr]["Answers"][2], TheQuestionSolutions),
-          // Answer(
-          //     questions[questionsCntr]["Answers"][3], TheQuestionSolutions),
+// Answer(
+//     questions[questionsCntr]["Answers"][0], TheQuestionSolutions),
+// Answer(
+//     questions[questionsCntr]["Answers"][1], TheQuestionSolutions),
+// Answer(
+//     questions[questionsCntr]["Answers"][2], TheQuestionSolutions),
+// Answer(
+//     questions[questionsCntr]["Answers"][3], TheQuestionSolutions),
